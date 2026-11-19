@@ -3,10 +3,17 @@ const http = require('http');
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-  res.end('<h1>Hello, World!</h1><p>Simple Web Server is running.</p>');
+  if (req.url === '/about') {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('About Page\n');
+  } else {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello, World!\n');
+  }
 });
 
 server.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}/`);
+  console.log(`Server running at http://localhost:${PORT}/`);
 });
